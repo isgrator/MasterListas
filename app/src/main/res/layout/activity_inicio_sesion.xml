@@ -55,6 +55,7 @@
             android:id="@+id/contraseña"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/ripple2"
             android:hint="@string/pswd"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
@@ -84,4 +85,33 @@
         android:textSize="12sp"
         app:layout_constraintLeft_toRightOf="@+id/recordarme"
         app:layout_constraintTop_toTopOf="@+id/recordarme" />
+
+    <Button
+        android:id="@+id/butt_acceder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ripple"
+        android:elevation="2dp"
+        android:onClick="acceder"
+        android:text="@string/iniciar_sesion"
+        android:textColor="@android:color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recordarme"
+        app:layout_constraintRight_toLeftOf="@+id/butt_borrar"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp" />
+    <Button
+        android:id="@+id/butt_borrar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/borrar"
+        android:focusable="true"
+        android:background="@drawable/ripple"
+        android:textColor="@android:color/white"
+        android:elevation="2dp"
+        android:onClick="borrarCampos"
+        app:layout_constraintLeft_toRightOf="@+id/butt_acceder"
+        app:layout_constraintTop_toTopOf="@+id/butt_acceder"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="8dp" />
 </android.support.constraint.ConstraintLayout>

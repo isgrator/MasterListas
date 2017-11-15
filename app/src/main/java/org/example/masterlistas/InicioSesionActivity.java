@@ -1,5 +1,6 @@
 package org.example.masterlistas;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -33,5 +34,18 @@ public class InicioSesionActivity extends AppCompatActivity {
             contraseña.setInputType(InputType.TYPE_CLASS_TEXT |
                     InputType.TYPE_TEXT_VARIATION_PASSWORD);
         }
+    }
+
+    public void acceder (View view){
+        Intent intent = new Intent(this, ListasActivity.class);
+        startActivity(intent);
+    }
+
+    public void borrarCampos(View view){
+        EditText usuario = (EditText) findViewById(R.id.usuario);
+        EditText contraseña = (EditText) findViewById(R.id.contraseña);
+        usuario.setText("");
+        contraseña.setText("");
+        usuario.requestFocus();
     }
 }
