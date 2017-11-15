@@ -18,7 +18,7 @@
         android:id="@+id/titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Iniciar sesión"
+        android:text="@string/iniciar_sesion"
         app:layout_constraintTop_toBottomOf="@+id/logo"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="16dp" />
@@ -35,7 +35,7 @@
             android:id="@+id/usuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre de usuario o correo"
+            android:hint="@string/nom_usuario"
             android:imeOptions="actionNext"
             android:inputType="text"
             android:textSize="14dp" />
@@ -53,9 +53,20 @@
             android:id="@+id/contraseña"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contraseña"
+            android:hint="@string/pswd"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
             android:textSize="14dp" />
     </android.support.design.widget.TextInputLayout>
+    <CheckBox
+        android:id="@+id/recordarme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/recordarme"
+        android:textSize="12dp"
+        android:textColor="@android:color/darker_gray"
+        android:onClick="loguearCheckbox"
+        app:layout_constraintTop_toBottomOf="@+id/til_contraseña"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="8dp"/>
 </android.support.constraint.ConstraintLayout>
