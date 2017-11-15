@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="16dp">
 
     <ImageView
@@ -114,4 +120,32 @@
         app:layout_constraintTop_toTopOf="@+id/butt_acceder"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginStart="8dp" />
+
+    <Button
+        android:id="@+id/boton_facebook"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:drawableStart="@drawable/facebook"
+        android:onClick="acceder"
+        android:text="@string/iniciar_sesion_facebook"
+        android:background="@color/primaryLightColor"
+        android:textColor="#000"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/butt_acceder"
+        android:layout_marginTop="32dp"/>
+    <Button
+        android:id="@+id/boton_google"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:drawableStart="@drawable/google"
+        android:onClick="acceder"
+        android:text="@string/iniciar_sesion_google"
+        android:textColor="#fff"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/boton_facebook"
+        android:layout_marginTop="8dp"/>
 </android.support.constraint.ConstraintLayout>
+</ScrollView>

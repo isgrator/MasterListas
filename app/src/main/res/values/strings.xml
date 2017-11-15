@@ -12,4 +12,6 @@
     <string name="logo">logo</string>
     <string name="icono">icono</string>
     <string name="borrar">Borrar</string>
+    <string name="iniciar_sesion_facebook">Iniciar sesión con Facebook</string>
+    <string name="iniciar_sesion_google">Iniciar sesión con Google</string>
 </resources>
