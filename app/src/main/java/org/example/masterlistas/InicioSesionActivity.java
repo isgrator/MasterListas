@@ -1,5 +1,6 @@
 package org.example.masterlistas;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,7 +39,7 @@ public class InicioSesionActivity extends AppCompatActivity {
 
     public void acceder (View view){
         Intent intent = new Intent(this, ListasActivity.class);
-        startActivity(intent);
+        startActivity(intent , ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 
     public void borrarCampos(View view){
