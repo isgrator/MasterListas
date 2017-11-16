@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.transition.Transition;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
@@ -18,6 +19,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.transition.TransitionInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -107,6 +109,9 @@ public class ListasActivity extends AppCompatActivity implements NavigationView.
                 R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        Transition lista_enter = TransitionInflater.from(this)
+                .inflateTransition(R.transition.transition_lista_enter);
+        getWindow().setEnterTransition(lista_enter);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
