@@ -25,7 +25,9 @@
             android:contentDescription="@string/icono"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/casa" />
+            tools:src="@drawable/casa"
+            android:transitionName ="@string/transition_name_img"/>
+
         <TextView
             android:id="@+id/nombre"
             android:layout_width="wrap_content"

@@ -27,4 +27,6 @@
     <string name="compartir">Compartir</string>
     <string name="drawer_open">Navigation drawer abierto</string>
     <string name="drawer_close">Navigation drawer cerrado</string>
+    <!--Transición-->
+    <string name="transition_name_img">transition:IMG</string>
 </resources>

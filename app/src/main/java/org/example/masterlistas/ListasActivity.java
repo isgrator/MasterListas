@@ -1,9 +1,13 @@
 package org.example.masterlistas;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -60,12 +64,29 @@ public class ListasActivity extends AppCompatActivity implements NavigationView.
         recycler.setAdapter(adapter);
 
         //Código para poder excuchar cada elemento del RecyclerView
-        recycler.addOnItemTouchListener(
+        /*recycler.addOnItemTouchListener(
                 new RecyclerItemClickListener(ListasActivity.this, new
                         RecyclerItemClickListener.OnItemClickListener() {
                             @Override public void onItemClick(View v, int position) {
                                 Toast.makeText(ListasActivity.this, "" + position,
                                         Toast.LENGTH_SHORT).show();
+                            }
+                        })
+        );*/
+        recycler.addOnItemTouchListener(
+                new RecyclerItemClickListener(ListasActivity.this,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override public void onItemClick(View v, int position) {
+                                Intent intent = new Intent(ListasActivity.this,
+                                        DetalleListaActivity.class);
+                                intent.putExtra("numeroLista", position);
+                                //startActivity(intent);
+                                ActivityOptionsCompat options = ActivityOptionsCompat.
+                                        makeSceneTransitionAnimation(ListasActivity.this,
+                                                new Pair<View, String>(v.findViewById(R.id.imagen),
+                                                        getString(R.string.transition_name_img)));
+                                ActivityCompat.startActivity(ListasActivity.this, intent, options
+                                        .toBundle());
                             }
                         })
         );
