@@ -14,4 +14,17 @@
     <string name="borrar">Borrar</string>
     <string name="iniciar_sesion_facebook">Iniciar sesión con Facebook</string>
     <string name="iniciar_sesion_google">Iniciar sesión con Google</string>
+    <string name="olvidado_pswd">HE OLVIDADO MI CONTRASEÑA</string>
+    <string name="quiero_registrarme">QUIERO REGISTRARME EN LA APLICACIÓN</string>
+    <string name="masterlistas">MasterListas</string>
+    <string name="url_curso">http://www.androidcurso.com</string>
+    <string name="TODO">TODO</string>
+    <string name="opc1"> Opción 1</string>
+    <string name="opc2"> Opción 2</string>
+    <string name="opc3"> Opción 3</string>
+    <string name="acciones_adicionales">Acciones adicionales</string>
+    <string name="preferencias">Preferencias</string>
+    <string name="compartir">Compartir</string>
+    <string name="drawer_open">Navigation drawer abierto</string>
+    <string name="drawer_close">Navigation drawer cerrado</string>
 </resources>
