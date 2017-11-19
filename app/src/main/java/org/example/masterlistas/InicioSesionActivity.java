@@ -10,12 +10,18 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 public class InicioSesionActivity extends AppCompatActivity {
+
+    private FirebaseAnalytics analytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio_sesion);
+
+        analytics = FirebaseAnalytics.getInstance(this);
     }
 
     public void loguearCheckbox(View v) {
@@ -38,6 +44,10 @@ public class InicioSesionActivity extends AppCompatActivity {
     }
 
     public void acceder (View view){
+        Bundle param = new Bundle();
+        param.putString("elemento", "boton inicio sesion MasterListas");
+        param.putInt("pulsacion_ms",34);
+        analytics.logEvent("butt_acceder", param);
         Intent intent = new Intent(this, ListasActivity.class);
         startActivity(intent , ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
