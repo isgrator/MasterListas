@@ -22,6 +22,9 @@
         <item name="android:windowSharedElementExitTransition">
             @transition/transition_curva
         </item>
+        
+
+
 
 
     </style>
