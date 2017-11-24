@@ -1,11 +1,13 @@
 package org.example.masterlistas;
 
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 
 import java.util.List;
 
@@ -21,9 +23,9 @@ public class ListaAdapter extends RecyclerView.Adapter <ListaAdapter.ListaViewHo
 
         public ListaViewHolder(View v) {
             super(v);
-            imagen = (ImageView) v.findViewById(R.id.imagen);
-            nombre = (TextView) v.findViewById(R.id.nombre);
-            elementos = (TextView) v.findViewById(R.id.elementos);
+            imagen =  v.findViewById(R.id.imagen);
+            nombre =  v.findViewById(R.id.nombre);
+            elementos =  v.findViewById(R.id.elementos);
         }
     }
 
@@ -47,7 +49,7 @@ public class ListaAdapter extends RecyclerView.Adapter <ListaAdapter.ListaViewHo
     public void onBindViewHolder(ListaViewHolder viewHolder, int i) {
         viewHolder.imagen.setImageResource(items.get(i).getImagen());
         viewHolder.nombre.setText(items.get(i).getNombre());
-        viewHolder.elementos.setText("Elementos:"
+        viewHolder.elementos.setText("Items:"
                 +String.valueOf(items.get(i).getElementos()));
     }
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MasterListas</string>
+    <string name="listas">Listas</string>
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="nom_usuario">Nombre de usuario o correo</string>
+    <string name="pswd">Contraseña</string>
+    <string name="recordarme">Recordarme</string>
+    <string name="texto_recordar">Recordar datos de usuario: </string>
+    <string name="si">Sí</string>
+    <string name="no">No</string>
+    <string name="mostrar_pswd">Mostrar contraseña</string>
+    <string name="logo">logo</string>
+    <string name="icono">icono</string>
+    <string name="borrar">Borrar</string>
+    <string name="iniciar_sesion_facebook">Iniciar sesión con Facebook</string>
+    <string name="iniciar_sesion_google">Iniciar sesión con Google</string>
+    <string name="olvidado_pswd">HE OLVIDADO MI CONTRASEÑA</string>
+    <string name="quiero_registrarme">QUIERO REGISTRARME EN LA APLICACIÓN</string>
+    <string name="masterlistas">MasterListas</string>
+    <string name="url_curso">http://www.androidcurso.com</string>
+    <string name="TODO">TODO</string>
+    <string name="opc1"> Opción 1</string>
+    <string name="opc2"> Opción 2</string>
+    <string name="opc3"> Opción 3</string>
+    <string name="acciones_adicionales">Acciones adicionales</string>
+    <string name="preferencias">Preferencias</string>
+    <string name="compartir">Compartir</string>
+    <string name="drawer_open">Navigation drawer abierto</string>
+    <string name="drawer_close">Navigation drawer cerrado</string>
+    <string name="descr_content_listas">Listas disponibles en la aplicación MasterListas</string>
+    <string name="personal">Personal</string>
+    <string name="trabajo">Trabajo</string>
+    <string name="elementos">Elementos</string>
+</resources>

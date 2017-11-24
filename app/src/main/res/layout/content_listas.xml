@@ -22,6 +22,7 @@
             app:toolbarId="@+id/toolbar">
 
             <ImageView
+                android:contentDescription="patron"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -37,7 +38,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Listas disponibles en la aplicación MasterListas"
+                    android:text="@string/descr_content_listas"
                     android:textColor="#fff"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -85,6 +86,7 @@
         app:elevation="6dp"
         app:rippleColor="#616161"
         android:clickable="true"
+        android:focusable="true"
         android:src="@drawable/fab_plus"/>
 </android.support.design.widget.CoordinatorLayout>
 

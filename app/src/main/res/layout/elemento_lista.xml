@@ -36,7 +36,7 @@
             app:layout_constraintLeft_toRightOf="@+id/imagen"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="8dp"
-            tools:text="Personal"/>
+            tools:text="@string/personal"/>
         <TextView
             android:id="@+id/elementos"
             android:layout_width="wrap_content"

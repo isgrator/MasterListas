@@ -55,8 +55,8 @@ public class ListasActivity extends AppCompatActivity {
         //Inicializar los elementos
         List items = new ArrayList();
 
-        items.add(new Lista(R.drawable.trabajo, "Trabajo", 2));
-        items.add(new Lista(R.drawable.casa, "Personal", 3));
+        items.add(new Lista(R.drawable.trabajo, getString(R.string.trabajo), 2));
+        items.add(new Lista(R.drawable.casa, getString(R.string.personal), 3));
 
         // Obtener el Recycler
         recycler = (RecyclerView) findViewById(R.id.reciclador);
@@ -101,12 +101,12 @@ public class ListasActivity extends AppCompatActivity {
 
         //Código para asociar el Navigation Drawer a la barra de acciones
         // Toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+        Toolbar toolbar = findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // Navigation Drawer (ver punto 5 de la pág.78)
-        NavigationView navigationView = (NavigationView) findViewById(
+        NavigationView navigationView =  findViewById(
                 R.id.vNavigation);
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
