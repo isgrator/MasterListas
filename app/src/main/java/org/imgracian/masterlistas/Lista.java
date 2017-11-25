@@ -1,4 +1,4 @@
-package org.example.masterlistas;
+package org.imgracian.masterlistas;
 
 
 public class Lista {

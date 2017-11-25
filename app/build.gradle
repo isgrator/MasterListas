@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "org.example.masterlistas" //Esto hay que cambiarlo
+        applicationId "org.imgracian.masterlistas" //Esto si se cambia hayq ue subirlo otra vez a FireBase
         minSdkVersion 21
         targetSdkVersion 27
         versionCode 1

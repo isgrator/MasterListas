@@ -1,4 +1,4 @@
-package org.example.masterlistas;
+package org.imgracian.masterlistas;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

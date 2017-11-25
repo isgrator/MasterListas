@@ -1,4 +1,4 @@
-package org.example.masterlistas;
+package org.imgracian.masterlistas;
 
 import org.junit.Test;
 
