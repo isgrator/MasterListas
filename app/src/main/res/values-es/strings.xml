@@ -32,4 +32,6 @@
     <string name="personal">Personal</string>
     <string name="trabajo">Trabajo</string>
     <string name="elementos">Elementos</string>
+    <string name="transition_name_img">transition:IMG</string>
+    <string name="transition_name_nombre">transition:IMG</string>
 </resources>
