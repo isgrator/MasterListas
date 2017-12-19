@@ -57,6 +57,9 @@ public class ListasActivity extends AppCompatActivity {
         items.add(new Lista(R.drawable.trabajo, getString(R.string.trabajo), 2));
         items.add(new Lista(R.drawable.casa, getString(R.string.personal), 3));
 
+        //Para puntuar la app
+        new RateMyApp(this).app_launched();
+
         // Obtener el Recycler
         recycler = (RecyclerView) findViewById(R.id.reciclador);
         recycler.setHasFixedSize(true);
@@ -126,6 +129,10 @@ public class ListasActivity extends AppCompatActivity {
                                         R.drawable.logo);
                                 compatirBitmap(bitmap, "Compartido por: "+
                                         "http://play.google.com/store/apps/details?id="+getPackageName());
+                                break;
+                            case  R.id.nav_compartir_desarrollador:
+                                compatirTexto(
+                                        "https://play.google.com/store/apps/dev?id=7027410910970713274");
                                 break;
                             default:
                                 Toast.makeText(getApplicationContext(), menuItem.getTitle(),
@@ -235,5 +242,7 @@ public class ListasActivity extends AppCompatActivity {
             startActivity(Intent.createChooser(i, getString(R.string.selecciona_app)));
         }
     }
+
+
 
 }

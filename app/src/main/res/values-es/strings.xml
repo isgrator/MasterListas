@@ -29,6 +29,12 @@
     <string name="compartir_lista">Compartir Lista</string>
     <string name="compartir_logo">Compartir Logo</string>
     <string name="selecciona_app">Selecciona aplicación</string>
+    <string name="please_rate">Por favor, toma un segundo para puntuar.</string>
+    <string name="rate_1">1. Si te encanta MasterListas, por favor, pon 5 estrellas en Play Store</string>
+    <string name="rate_2">2. Si tienes problemas, por favor coontacta con el autor para resolverlos.</string>
+    <string name="contactar_autor">CONTACTAR AUTOR</string>
+    <string name="rate_5stars">PUNTUAR 5 ESTRELLAS</string>
+    <string name="compartir_desarrollador">Compartir desarrollador</string>
     <string name="drawer_open">Navigation drawer abierto</string>
     <string name="drawer_close">Navigation drawer cerrado</string>
     <string name="descr_content_listas">Listas disponibles en la aplicación MasterListas</string>

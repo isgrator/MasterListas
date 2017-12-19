@@ -29,6 +29,12 @@
     <string name="compartir_lista">Share List</string>
     <string name="compartir_logo">Share Logo</string>
     <string name="slecciona_app">Select application</string>
+    <string name="please_rate">Please take a second for rate</string>
+    <string name="rate_1">1. Love MasterListas, please rate 5 star in Play Store</string>
+    <string name="rate_2">2. Have problems, please contact author to report issue</string>
+    <string name="contactar_autor">CONTACT AUTHOR</string>
+    <string name="rate_5stars">RATE 5 STAR</string>
+    <string name="compartir_desarrollador">Share Developer</string>
     <string name="drawer_open">Navigation drawer open</string>
     <string name="drawer_close">Navigation drawer close</string>
     <string name="descr_content_listas">Available lists in the app MasterListas</string>
