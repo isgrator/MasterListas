@@ -1,11 +1,15 @@
 package org.imgracian.masterlistas;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +24,9 @@ import android.widget.Toast;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,6 +121,12 @@ public class ListasActivity extends AppCompatActivity {
                                         "Compartido por: http://play.google.com/store/apps/details?id="+
                                         getPackageName());
                                 break;
+                            case  R.id.nav_compartir_logo:
+                                Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
+                                        R.drawable.logo);
+                                compatirBitmap(bitmap, "Compartido por: "+
+                                        "http://play.google.com/store/apps/details?id="+getPackageName());
+                                break;
                             default:
                                 Toast.makeText(getApplicationContext(), menuItem.getTitle(),
                                         Toast.LENGTH_SHORT).show();
@@ -191,7 +204,36 @@ public class ListasActivity extends AppCompatActivity {
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("text/plain");
         i.putExtra(Intent.EXTRA_TEXT, texto);
-        startActivity(Intent.createChooser(i, "Selecciona aplicación"));
+        startActivity(Intent.createChooser(i, getString(R.string.selecciona_app)));
+    }
+
+    //método para compartir fichero y añadir URL
+    void compatirBitmap(Bitmap bitmap, String texto) {
+        // guardamos bitmap en el directorio cache
+        try {
+            File cachePath = new File(getCacheDir(), "images");
+            cachePath.mkdirs();
+            FileOutputStream s = new FileOutputStream(cachePath+"/image.png");
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, s);
+            s.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // Obtenemos la URI usando el FileProvider
+        File path = new File(getCacheDir(), "images");
+        File file = new File(path, "image.png");
+        Uri uri= FileProvider.getUriForFile(this,
+                "org.imgracian.masterlistas.organizador.listas.fileprovider", file);
+        //Compartimos la URI
+        if (uri != null) {
+            Intent i = new Intent(Intent.ACTION_SEND);
+            i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            // temp permission for receiving app to read this file
+            i.setDataAndType(uri,getContentResolver().getType(uri));
+            i.putExtra(Intent.EXTRA_STREAM, uri);
+            i.putExtra(Intent.EXTRA_TEXT, texto);
+            startActivity(Intent.createChooser(i, getString(R.string.selecciona_app)));
+        }
     }
 
 }

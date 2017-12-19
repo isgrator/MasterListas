@@ -27,6 +27,8 @@
     <string name="preferencias">Preferencias</string>
     <string name="compartir">Compartir App</string>
     <string name="compartir_lista">Compartir Lista</string>
+    <string name="compartir_logo">Compartir Logo</string>
+    <string name="selecciona_app">Selecciona aplicación</string>
     <string name="drawer_open">Navigation drawer abierto</string>
     <string name="drawer_close">Navigation drawer cerrado</string>
     <string name="descr_content_listas">Listas disponibles en la aplicación MasterListas</string>
