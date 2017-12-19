@@ -1,5 +1,6 @@
 package org.imgracian.masterlistas;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,6 +19,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 
@@ -42,6 +44,8 @@ public class ListasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listas);
+
+        showCrossPromoDialog();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -243,6 +247,27 @@ public class ListasActivity extends AppCompatActivity {
         }
     }
 
-
+    //Método para dialog de cross-promotion
+    private void showCrossPromoDialog() {
+        final Dialog dialog = new Dialog(this, R.style.Theme_AppCompat);
+        dialog.setContentView(R.layout.dialog_crosspromotion);
+        dialog.setCancelable(true);
+        Button buttonCancel = (Button) dialog.findViewById(R.id.buttonCancel);
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        Button boton = (Button) dialog.findViewById(R.id.buttonDescargar);
+        boton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(
+                        "https://play.google.com/store/apps/details?" +
+                                "id=com.mimisoftware.emojicreatoremoticonosemoticones")));
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
 
 }
