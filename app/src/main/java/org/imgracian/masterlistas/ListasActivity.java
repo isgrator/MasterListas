@@ -27,6 +27,10 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
@@ -46,11 +50,39 @@ public class ListasActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager lManager;
     private AdView adView;
     private InterstitialAd interstitialAd;
+    private RewardedVideoAd ad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listas);
+
+        //Código para el vídeo bonificado
+        ad = MobileAds.getRewardedVideoAdInstance(this);
+        ad.setRewardedVideoAdListener(new RewardedVideoAdListener() {
+            @Override public void onRewardedVideoAdLoaded() {
+                Toast.makeText(ListasActivity.this,"Vídeo Bonificado cargado",
+                        Toast.LENGTH_SHORT).show();
+            }
+            @Override public void onRewardedVideoAdOpened() {}
+            @Override public void onRewardedVideoStarted() {}
+            @Override public void onRewardedVideoAdClosed() {
+                ad.loadAd("ca-app-pub-5594373787368665/7840874966", new AdRequest
+                        .Builder().build());
+                        //.addTestDevice("ID_DISPOSITIVO_FISICO_TEST").build());
+            }
+            @Override public void onRewarded(RewardItem rewardItem) {
+                Toast.makeText(ListasActivity.this, "onRewarded: moneda virtual: " +
+                                rewardItem.getType() + "  aumento: " + rewardItem.getAmount(),
+                        Toast.LENGTH_SHORT).show();
+            }
+            @Override public void onRewardedVideoAdLeftApplication() {}
+            @Override public void onRewardedVideoAdFailedToLoad(int i) {}
+        });
+
+        //Carga del video bonificado
+        ad.loadAd("ca-app-pub-5594373787368665/7840874966", new AdRequest.Builder().build());
+                //.addTestDevice("ID_DISPOSITIVO_FISICO_TEST").build());
 
         showCrossPromoDialog();
 
@@ -181,6 +213,11 @@ public class ListasActivity extends AppCompatActivity {
                             case  R.id.nav_compartir_desarrollador:
                                 compatirTexto(
                                         "https://play.google.com/store/apps/dev?id=7027410910970713274");
+                                break;
+                            case R.id.nav_1:
+                                if (ad.isLoaded()) {
+                                    ad.show();
+                                }
                                 break;
                             default:
                                 Toast.makeText(getApplicationContext(), menuItem.getTitle(),
