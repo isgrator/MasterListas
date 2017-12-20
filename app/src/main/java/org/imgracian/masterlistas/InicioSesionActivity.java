@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class InicioSesionActivity extends AppCompatActivity {
@@ -21,7 +22,11 @@ public class InicioSesionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio_sesion);
 
+        MobileAds.initialize(this,"ca-app-pub-5594373787368665~1826593970");
+
         analytics = FirebaseAnalytics.getInstance(this);
+
+
     }
 
     public void loguearCheckbox(View v) {

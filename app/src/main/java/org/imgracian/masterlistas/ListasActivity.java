@@ -23,6 +23,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
@@ -33,12 +37,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 public class ListasActivity extends AppCompatActivity {
     //implements NavigationView.OnNavigationItemSelectedListener {
     private FlowingDrawer mDrawer;
     private RecyclerView recycler;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager lManager;
+    private AdView adView;
+    private InterstitialAd interstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +54,50 @@ public class ListasActivity extends AppCompatActivity {
 
         showCrossPromoDialog();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        //Anuncio intersticial
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId("ca-app-pub-5594373787368665/5049515509");
+        interstitialAd.loadAd(new AdRequest.Builder().build());
+                //.addTestDevice("ID_DISPOSITIVO_FISICO_TEST").build());
+        //Escuchador que carga el anuncio cuando se solicite
+        interstitialAd.setAdListener(new AdListener() {
+            @Override public void onAdClosed() {
+                interstitialAd.loadAd(new AdRequest.Builder()
+                        .addTestDevice("ca-app-pub-5594373787368665/5049515509").build());
+            }
+        });
+
+        //Código que muestra el anuncio
+        FloatingActionButton f= findViewById(R.id.fab);
+        f.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                if (interstitialAd.isLoaded()) {
+                    interstitialAd.show();
+                } else {
+                    Toast.makeText(ListasActivity.this,
+                            getString(R.string.anuncio_no_disponible), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        //Para el banner de adMob
+        /*adView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);*/
+        //en disp. físico
+        adView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+                //.addTestDevice("4F3D741664405A22822CC65D95D3DEEE").build();
+        adView.loadAd(adRequest);
+
+
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Se presionó el FAB", Snackbar.LENGTH_LONG).show();
             }
-        });
+        });*/
 
         //Inicializar los elementos
         List items = new ArrayList();
@@ -269,5 +313,6 @@ public class ListasActivity extends AppCompatActivity {
         });
         dialog.show();
     }
+
 
 }

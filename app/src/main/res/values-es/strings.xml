@@ -35,6 +35,7 @@
     <string name="contactar_autor">CONTACTAR AUTOR</string>
     <string name="rate_5stars">PUNTUAR 5 ESTRELLAS</string>
     <string name="compartir_desarrollador">Compartir desarrollador</string>
+    <string name="anuncio_no_disponible">El Anuncio no esta disponible aun</string>
     <string name="drawer_open">Navigation drawer abierto</string>
     <string name="drawer_close">Navigation drawer cerrado</string>
     <string name="descr_content_listas">Listas disponibles en la aplicación MasterListas</string>

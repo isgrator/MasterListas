@@ -35,6 +35,7 @@
     <string name="contactar_autor">CONTACT AUTHOR</string>
     <string name="rate_5stars">RATE 5 STAR</string>
     <string name="compartir_desarrollador">Share Developer</string>
+    <string name="anuncio_no_disponible">Unavailable advertisement yet</string>
     <string name="drawer_open">Navigation drawer open</string>
     <string name="drawer_close">Navigation drawer close</string>
     <string name="descr_content_listas">Available lists in the app MasterListas</string>

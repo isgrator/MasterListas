@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "83505594600",
-    "firebase_url": "https://masterlistas-5fcc5.firebaseio.com",
-    "project_id": "masterlistas-5fcc5",
-    "storage_bucket": "masterlistas-5fcc5.appspot.com"
+    "project_number": "518747501607",
+    "firebase_url": "https://masterlistas-b5e2d.firebaseio.com",
+    "project_id": "masterlistas-b5e2d",
+    "storage_bucket": "masterlistas-b5e2d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:83505594600:android:efa5baedadb48839",
+        "mobilesdk_app_id": "1:518747501607:android:efa5baedadb48839",
         "android_client_info": {
           "package_name": "org.imgracian.masterlistas.organizador.listas"
         }
       },
       "oauth_client": [
         {
-          "client_id": "83505594600-q0lqofk0iti47q4jgo9kdb4ifidasgre.apps.googleusercontent.com",
+          "client_id": "518747501607-bhdatvppdsgm9ru86an94n4qnfv43fdp.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDu83QZBQdUkjlDQf_MT550L2Mr8199VBA"
+          "current_key": "AIzaSyCUoRlLFMjTzJKhTohwgOXo6jUslIck-lw"
         }
       ],
       "services": {
