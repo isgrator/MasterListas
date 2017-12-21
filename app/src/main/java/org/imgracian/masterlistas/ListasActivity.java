@@ -251,6 +251,9 @@ public class ListasActivity extends AppCompatActivity {
                             case  R.id.nav_consulta_inapps_disponibles:
                                 getInAppInformationOfProducts();
                                 break;
+                            case  R.id.nav_consulta_subs_disponibles:
+                                getSubscriptionInformationOfProducts();
+                                break;
                             default:
                                 Toast.makeText(getApplicationContext(), menuItem.getTitle(),
                                         Toast.LENGTH_SHORT).show();
@@ -523,4 +526,33 @@ public class ListasActivity extends AppCompatActivity {
         }
     }
 
+    //Método para conocer las suscripciones disponibles
+    private void getSubscriptionInformationOfProducts(){
+        ArrayList<String> skuListSubs = new ArrayList<String> ();
+        skuListSubs.add(ID_SUSCRIPCION);
+        Bundle querySkusSubs = new Bundle();
+        querySkusSubs.putStringArrayList("ITEM_ID_LIST", skuListSubs);
+        Bundle skuDetailsSubs;
+        ArrayList<String> responseListSubs;
+        try{
+            skuDetailsSubs = serviceBilling.getSkuDetails(
+                    3,getPackageName(),"subs",querySkusSubs);
+            int responseSubs = skuDetailsSubs.getInt("RESPONSE_CODE");
+            System.out.println(responseSubs);
+            if (responseSubs == 0) {
+                responseListSubs = skuDetailsSubs.getStringArrayList(
+                        "DETAILS_LIST");
+                assert responseListSubs != null;
+                for (String thisResponse : responseListSubs) {
+                    JSONObject object = new JSONObject(thisResponse);
+                    String ref = object.getString("productId");
+                    System.out.println("Subscription Reference: " + ref);
+                    String price = object.getString("price");
+                    System.out.println("Subscription Price: " + price);
+                }
+            }
+        } catch (RemoteException | JSONException e) {
+            e.printStackTrace();
+        }
+    }
 }

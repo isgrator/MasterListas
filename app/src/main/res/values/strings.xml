@@ -45,6 +45,7 @@
     <string name="comprar_articulo">Buy item</string>
     <string name="comprar_suscripcion">Buy Subscription</string>
     <string name="art_disponibles">Available items</string>
+    <string name="suscrip_disponibles">Available subscriptions</string>
     <!--Transición-->
     <string name="transition_name_img">transition:IMG</string>
     <string name="transition_name_nombre">transition:IMG</string>
