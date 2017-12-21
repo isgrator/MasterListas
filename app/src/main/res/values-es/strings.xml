@@ -47,5 +47,5 @@
     <string name="comprar_articulo">Comprar artículo</string>
     <string name="comprar_suscripcion">Comprar Suscripción</string>
     <string name="art_disponibles">Artículos Disponibles</string>
-    <string name="suscrip_disponibles">Suscripciones Disponibles</string>
+    <string name="suscrip_disponibles">Suscripciones Disp.</string>
 </resources>

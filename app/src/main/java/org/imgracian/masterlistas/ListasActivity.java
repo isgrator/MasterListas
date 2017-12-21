@@ -394,7 +394,10 @@ public class ListasActivity extends AppCompatActivity {
             }
             @Override public void onServiceConnected(
                     ComponentName name, IBinder service) {
-                serviceBilling=IInAppBillingService.Stub.asInterface(service);       }
+                serviceBilling=IInAppBillingService.Stub.asInterface(service);
+                checkPurchasedInAppProducts();
+                checkPurchasedSubscriptions();
+            }
         };
         Intent serviceIntent = new Intent(
                 "com.android.vending.billing.InAppBillingService.BIND");   serviceIntent.setPackage("com.android.vending");
@@ -499,6 +502,7 @@ public class ListasActivity extends AppCompatActivity {
         }
     }
 
+    //Método para consultar los artículos disponibles
     public void getInAppInformationOfProducts(){
         ArrayList<String> skuList = new ArrayList<String> ();
         skuList.add(ID_ARTICULO);
@@ -525,6 +529,50 @@ public class ListasActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    //Método para consultar los artículos comprados
+    private void checkPurchasedInAppProducts() {
+        Bundle ownedItemsInApp = null;
+        if (serviceBilling != null) {
+            try {
+                ownedItemsInApp = serviceBilling.getPurchases(3, getPackageName(),
+                        "inapp",
+                        null);
+            }catch(RemoteException e)
+            {
+                e.printStackTrace();
+            }
+
+            int response = ownedItemsInApp.getInt("RESPONSE_CODE");
+            System.out.println(response);
+            if(response == 0)
+            {
+                ArrayList<String> ownedSkus = ownedItemsInApp
+                        .getStringArrayList("INAPP_PURCHASE_ITEM_LIST");
+                ArrayList<String> purchaseDataList = ownedItemsInApp
+                        .getStringArrayList("INAPP_PURCHASE_DATA_LIST");
+                ArrayList<String> signatureList = ownedItemsInApp
+                        .getStringArrayList("INAPP_DATA_SIGNATURE_LIST");
+                String continuationToken = ownedItemsInApp
+                        .getString("INAPP_CONTINUATION_TOKEN");
+                for (int i = 0; i < purchaseDataList.size(); ++i) {
+                    String purchaseData = purchaseDataList.get(i);
+                    String signature = signatureList.get(i);
+                    String sku = ownedSkus.get(i);
+                    System.out.println("Inapp Purchase data: " +
+                            purchaseData);
+                    System.out.println("Inapp Signature: " + signature);
+                    System.out.println("Inapp Sku: " + sku);
+                    if (sku.equals(ID_ARTICULO)) {
+                        Toast.makeText(this,
+                                "Inapp comprado: " + sku + "el dia " +
+                                        purchaseData, Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        }
+    }
+
 
     //Método para conocer las suscripciones disponibles
     private void getSubscriptionInformationOfProducts(){
@@ -555,4 +603,43 @@ public class ListasActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    //Consultar suscripciones compradas
+    private void checkPurchasedSubscriptions() {
+        Bundle ownedItemsInApp = null;
+        if (serviceBilling != null) {
+            try {
+                ownedItemsInApp = serviceBilling.getPurchases(
+                        3, getPackageName(), "subs", null);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+            int response = ownedItemsInApp.getInt("RESPONSE_CODE");
+            System.out.println(response);
+            if (response == 0) {
+                ArrayList<String> ownedSkus = ownedItemsInApp
+                        .getStringArrayList("INAPP_PURCHASE_ITEM_LIST");
+                ArrayList<String> purchaseDataList = ownedItemsInApp
+                        .getStringArrayList("INAPP_PURCHASE_DATA_LIST");
+                ArrayList<String> signatureList = ownedItemsInApp
+                        .getStringArrayList("INAPP_DATA_SIGNATURE_LIST");
+                String continuationToken = ownedItemsInApp
+                        .getString("INAPP_CONTINUATION_TOKEN");
+                for (int i = 0; i < purchaseDataList.size(); ++i) {
+                    String purchaseData = purchaseDataList.get(i);
+                    String signature = signatureList.get(i);
+                    String sku = ownedSkus.get(i);
+                    System.out.println("Suscription Purchase data: " +
+                            purchaseData);
+                    System.out.println("Suscription Signature: " + signature);
+                    System.out.println("Suscription Sku: " + sku);
+                    if (sku.equals(ID_SUSCRIPCION)) {
+                        Toast.makeText(this, "Suscrito correctamente: " + sku +
+                                "el dia " + purchaseData, Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        }
+    }
 }
+
