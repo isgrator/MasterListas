@@ -1,10 +1,17 @@
 package org.imgracian.masterlistas;
 
 import android.app.Dialog;
+import android.app.PendingIntent;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
+import android.content.ServiceConnection;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -23,6 +30,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
+import com.android.vending.billing.IInAppBillingService;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -33,6 +41,9 @@ import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -51,11 +62,20 @@ public class ListasActivity extends AppCompatActivity {
     private AdView adView;
     private InterstitialAd interstitialAd;
     private RewardedVideoAd ad;
+    private IInAppBillingService serviceBilling;
+    private ServiceConnection serviceConnection;
+    private final String ID_ARTICULO = "org.imgracian.masterlistas.organizador.listas.producto";
+    private final int INAPP_BILLING = 1;
+    private final String developerPayLoad = "información adicional";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listas);
+
+        //Para comprar artículo
+        serviceConectInAppBilling();
 
         //Código para el vídeo bonificado
         ad = MobileAds.getRewardedVideoAdInstance(this);
@@ -219,6 +239,9 @@ public class ListasActivity extends AppCompatActivity {
                                     ad.show();
                                 }
                                 break;
+                            case R.id.nav_articulo_no_recurrente:
+                                comprarProducto();
+                                break;
                             default:
                                 Toast.makeText(getApplicationContext(), menuItem.getTitle(),
                                         Toast.LENGTH_SHORT).show();
@@ -349,6 +372,75 @@ public class ListasActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+
+    //Método para comprar un artículo no recurrente
+    public void serviceConectInAppBilling() {
+        serviceConnection = new ServiceConnection() {
+            @Override public void onServiceDisconnected(ComponentName name) {
+                serviceBilling = null;
+            }
+            @Override public void onServiceConnected(
+                    ComponentName name, IBinder service) {
+                serviceBilling=IInAppBillingService.Stub.asInterface(service);       }
+        };
+        Intent serviceIntent = new Intent(
+                "com.android.vending.billing.InAppBillingService.BIND");   serviceIntent.setPackage("com.android.vending");
+        bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE);}
+
+
+    public void comprarProducto() {
+        if (serviceBilling != null) {
+            Bundle buyIntentBundle = null;
+            try {
+                buyIntentBundle= serviceBilling.getBuyIntent(3, getPackageName(),
+                        ID_ARTICULO, "inapp", developerPayLoad);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+            PendingIntent pendingIntent = buyIntentBundle
+                    .getParcelable("BUY_INTENT");
+            try {
+                if(pendingIntent!=null) {
+                    startIntentSenderForResult(pendingIntent.getIntentSender(),
+                            INAPP_BILLING,new Intent(), 0, 0, 0);
+                }
+            } catch (IntentSender.SendIntentException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Toast.makeText(this, "InApp Billing service not available",
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+    //Para comprobar que se ha comprado el artículo
+    @Override protected void onActivityResult(int requestCode, int resultCode,
+                                              Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case INAPP_BILLING: {
+                int responseCode = data.getIntExtra("RESPONSE_CODE", 0);
+                String purchaseData =
+                        data.getStringExtra("INAPP_PURCHASE_DATA");
+                String dataSignature = data.getStringExtra(
+                        "INAPP_DATA_SIGNATURE");
+                if (resultCode == RESULT_OK) {
+                    try {
+                        JSONObject jo = new JSONObject(purchaseData);
+                        String sku = jo.getString("productId");
+                        String developerPayload = jo.getString("developerPayload");
+                        String purchaseToken = jo.getString("purchaseToken");
+                        if (sku.equals(ID_ARTICULO)) {
+                            Toast.makeText(this,"Compra completada",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
     }
 
 

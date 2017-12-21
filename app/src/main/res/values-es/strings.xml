@@ -44,4 +44,5 @@
     <string name="elementos">Elementos</string>
     <string name="transition_name_img">transition:IMG</string>
     <string name="transition_name_nombre">transition:IMG</string>
+    <string name="comprar_articulo">Comprar artículo</string>
 </resources>

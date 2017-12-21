@@ -6,8 +6,8 @@ android {
         applicationId "org.imgracian.masterlistas.organizador.listas" //Esto si se cambia hayq ue subirlo otra vez a FireBase
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -33,6 +33,7 @@ dependencies {
     implementation 'com.android.support:design:27.0.1'
     implementation 'com.android.support:cardview-v7:27.0.1'
     compile 'com.google.android.gms:play-services-ads:11.6.0'
+    compile 'com.android.billingclient:billing:1.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
