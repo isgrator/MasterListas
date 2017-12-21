@@ -248,6 +248,9 @@ public class ListasActivity extends AppCompatActivity {
                             case  R.id.nav_susbripcion:
                                 comprarSuscripcion(ListasActivity.this);
                                 break;
+                            case  R.id.nav_consulta_inapps_disponibles:
+                                getInAppInformationOfProducts();
+                                break;
                             default:
                                 Toast.makeText(getApplicationContext(), menuItem.getTitle(),
                                         Toast.LENGTH_SHORT).show();
@@ -493,6 +496,31 @@ public class ListasActivity extends AppCompatActivity {
         }
     }
 
-
+    public void getInAppInformationOfProducts(){
+        ArrayList<String> skuList = new ArrayList<String> ();
+        skuList.add(ID_ARTICULO);
+        Bundle querySkus = new Bundle();
+        querySkus.putStringArrayList("ITEM_ID_LIST", skuList);
+        Bundle skuDetails;
+        ArrayList<String> responseList;
+        try {
+            skuDetails = serviceBilling.getSkuDetails(3, getPackageName(),
+                    "inapp", querySkus);
+            int response = skuDetails.getInt("RESPONSE_CODE");
+            if (response == 0) {
+                responseList = skuDetails.getStringArrayList("DETAILS_LIST");
+                assert responseList != null;
+                for (String thisResponse : responseList) {
+                    JSONObject object = new JSONObject(thisResponse);
+                    String ref = object.getString("productId");
+                    System.out.println("InApp Reference: " + ref);
+                    String price = object.getString("price");
+                    System.out.println("InApp Price: " + price);
+                }
+            }
+        } catch (RemoteException | JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
