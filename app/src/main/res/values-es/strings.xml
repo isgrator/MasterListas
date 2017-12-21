@@ -45,4 +45,6 @@
     <string name="transition_name_img">transition:IMG</string>
     <string name="transition_name_nombre">transition:IMG</string>
     <string name="comprar_articulo">Comprar artículo</string>
+    <string name="comprar_suscripcion">Comprar Suscripción</string>
+    <string name="art_disponibles">Artículos disponibles</string>
 </resources>

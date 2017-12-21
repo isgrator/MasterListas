@@ -1,5 +1,6 @@
 package org.imgracian.masterlistas;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.ComponentName;
@@ -67,6 +68,8 @@ public class ListasActivity extends AppCompatActivity {
     private final String ID_ARTICULO = "org.imgracian.masterlistas.organizador.listas.producto";
     private final int INAPP_BILLING = 1;
     private final String developerPayLoad = "información adicional";
+    private final String ID_SUSCRIPCION =
+            "org.imgracian.masterlistas.organizador.listas.suscripcion";
 
 
     @Override
@@ -241,6 +244,9 @@ public class ListasActivity extends AppCompatActivity {
                                 break;
                             case R.id.nav_articulo_no_recurrente:
                                 comprarProducto();
+                                break;
+                            case  R.id.nav_susbripcion:
+                                comprarSuscripcion(ListasActivity.this);
                                 break;
                             default:
                                 Toast.makeText(getApplicationContext(), menuItem.getTitle(),
@@ -434,6 +440,9 @@ public class ListasActivity extends AppCompatActivity {
                         if (sku.equals(ID_ARTICULO)) {
                             Toast.makeText(this,"Compra completada",
                                     Toast.LENGTH_LONG).show();
+                            backToBuy(purchaseToken);
+                        } else if (sku.equals(ID_SUSCRIPCION)) {
+                            Toast.makeText(this, "Suscripción correcta", Toast.LENGTH_LONG).show();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -442,6 +451,48 @@ public class ListasActivity extends AppCompatActivity {
             }
         }
     }
+
+    //Método para comprar un artículo recurrente
+    public void backToBuy(String token){
+        //IInAppBillingService serviceBilling = application.getServiceBilling();
+        if (serviceBilling != null) {
+            try {
+                int response = serviceBilling.consumePurchase(
+                        3, getPackageName(), token);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    //Método para comprar una suscripción
+
+    public void comprarSuscripcion(Activity activity) {
+        if (serviceBilling != null) {
+            Bundle buyIntentBundle = null;
+            try {
+                buyIntentBundle = serviceBilling.getBuyIntent(3, activity
+                        .getPackageName(), ID_SUSCRIPCION, "subs", developerPayLoad);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+            assert buyIntentBundle != null;
+            PendingIntent pendingIntent =
+                    buyIntentBundle.getParcelable("BUY_INTENT");
+
+            try {
+                assert pendingIntent != null;
+                activity.startIntentSenderForResult(pendingIntent
+                        .getIntentSender(), INAPP_BILLING, new Intent(), 0, 0, 0);
+            } catch (IntentSender.SendIntentException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Toast.makeText(activity, "Servicio de suscripción no disponible",
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
 
 
 }
